@@ -105,7 +105,7 @@ public class RadioGUI extends JFrame {
 		JButton btnNewButton_7 = new JButton("AM/FM");
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				radio_operaciones.am_fm();
+				radio_operaciones.amfm_();
 				
 			}
 		});
@@ -148,7 +148,7 @@ public class RadioGUI extends JFrame {
 		JButton btnNewButton_11 = new JButton("On/Off");
 		btnNewButton_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				radio_operaciones.onoff();
+				radio_operaciones.onoff_();
 			}
 		});
 		btnNewButton_11.setBounds(10, 11, 89, 23);

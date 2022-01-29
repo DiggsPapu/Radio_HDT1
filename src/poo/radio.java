@@ -1,7 +1,7 @@
 package poo;
 import java.util.ArrayList;
 
-public class radio {
+public class radio implements change_up_operations, two_options_operations, change_down_operations {
 	boolean on_off;
 	int volume;
 	boolean am_fm;
@@ -18,69 +18,7 @@ public class radio {
 		this.tuned_am = 530;
 		this.tuned_fm = 87.9;
 		this.SavedStations=null;
-		
-	}
-	
-	public void onoff() {
-		if (on_off == true) {
-			on_off=false;
-		}
-		else {
-			on_off= true;
-		}
-		
-	}
-	
-	public void am_fm() {
-		if (on_off ==true) {
-			if (am_fm == true) {
-				am_fm=false;
-			}
-			else {
-				am_fm= true;
-			}
-			
-		}
-		
-	}
-	
-	public void change_up_tuned() {
-		if (on_off == true) {
-			if (am_fm==true && tuned_fm<108.1) {
-				setTuned_fm(tuned_fm+0.2);
-			}
-			else if ((am_fm==true && tuned_fm>=108.1)) {
-				setTuned_fm(87.9);
-			}
-			else if (am_fm==false && tuned_am<1620) {
-				setTuned_am(tuned_am+10);
-			}
-			else if ((am_fm==false && tuned_am>=1620)) {
-				setTuned_am(530);
-			}
-			
-		}
-		
-	}
-	
-	public void change_down_tuned() {
-		if (on_off==true) {
-			if (am_fm==true && tuned_fm<108.1) {
-				setTuned_fm(tuned_fm-0.2);
-			}
-			else if ((am_fm==true && tuned_fm>=108.1)) {
-				setTuned_fm(107.9);
-			}
-			else if (am_fm==false && tuned_am>530) {
-				setTuned_am(tuned_am-10);
-			}
-			else if ((am_fm==false && tuned_am<=530)) {
-				setTuned_am(1610);
-			}
-
-		}
-	}
-	
+	}	
 	
 	public boolean isOn_off() {
 		return on_off;
@@ -129,5 +67,98 @@ public class radio {
 	}
 	public void setSavedStations(String savedStations) {
 		SavedStations = savedStations;
+	}
+
+	
+//Interface two_options_operations
+	@Override
+	public void onoff_() {
+		// TODO Auto-generated method stub
+		if (on_off == true) {
+			on_off=false;
+		}
+		else {
+			on_off= true;
+		}
+	}
+
+	@Override
+	public void amfm_() {
+		// TODO Auto-generated method stub
+		if (on_off ==true) {
+			if (am_fm == true) {
+				am_fm=false;
+			}
+			else {
+				am_fm= true;
+			}	
+		}
+	}
+	
+
+	// Interface change_up_operations
+	@Override
+	public void change_volume_up() {
+		// TODO Auto-generated method stub
+		if (on_off==true) {
+			if (volume<=99) {
+				setVolume(volume+1);	
+			}
+			else {
+				
+			}
+		}
+	}
+
+	@Override
+	public void change_station_up() {
+		// TODO Auto-generated method stub
+		if (on_off == true) {
+			if (am_fm==true && tuned_fm<108.1) {
+				setTuned_fm(tuned_fm+0.2);
+			}
+			else if ((am_fm==true && tuned_fm>=108.1)) {
+				setTuned_fm(87.9);
+			}
+			else if (am_fm==false && tuned_am<1620) {
+				setTuned_am(tuned_am+10);
+			}
+			else if ((am_fm==false && tuned_am>=1620)) {
+				setTuned_am(530);
+			}
+		}
+	}
+	
+	
+//Interface change_down_operations
+	@Override
+	public void change_station_down() {
+		// TODO Auto-generated method stub
+		if (on_off==true) {
+			if (am_fm==true && tuned_fm<108.1) {
+				setTuned_fm(tuned_fm-0.2);
+			}
+			else if ((am_fm==true && tuned_fm>=108.1)) {
+				setTuned_fm(107.9);
+			}
+			else if (am_fm==false && tuned_am>530) {
+				setTuned_am(tuned_am-10);
+			}
+			else if ((am_fm==false && tuned_am<=530)) {
+				setTuned_am(1610);
+			}
+		}
+	}
+	@Override
+	public void change_volume_down() {
+		// TODO Auto-generated method stub
+		if (on_off==true) {
+			if (volume>0) {
+				setVolume(volume-1);	
+			}
+			else {
+				
+			}
+		}
 	}
 }
