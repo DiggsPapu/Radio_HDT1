@@ -1,15 +1,14 @@
 package poo;
 import java.util.ArrayList;
 
-public class radio implements change_up_operations, two_options_operations, change_down_operations {
+public class radio implements change_up_operations, two_options_operations, change_down_operations, save_radio_operations {
 	boolean on_off;
 	int volume;
 	boolean am_fm;
 	double tuned_am;
 	double tuned_fm;
-	ArrayList<String> am;
-	ArrayList<String> fm;
-	String SavedStations;
+	ArrayList<Double> am;
+	ArrayList<Double> fm;
 	
 	public radio() {
 		this.on_off = false;
@@ -17,7 +16,15 @@ public class radio implements change_up_operations, two_options_operations, chan
 		this.am_fm = false;
 		this.tuned_am = 530;
 		this.tuned_fm = 87.9;
-		this.SavedStations=null;
+		this.am = new ArrayList<Double>();
+		for (int i=1;i<=7;i=i+1) {
+			am.add(530.0+10*i);
+		}
+		this.fm = new ArrayList<Double>();
+		for (int i=1;i<=7;i=i+1) {
+			fm.add(87.9+0.2*i);
+		}
+
 	}	
 	
 	public boolean isOn_off() {
@@ -50,24 +57,19 @@ public class radio implements change_up_operations, two_options_operations, chan
 	public void setTuned_fm(double tuned_fm) {
 		this.tuned_fm = tuned_fm;
 	}
-	public ArrayList<String> getAm() {
+	public ArrayList<Double> getAm() {
 		return am;
 	}
-	public void setAm(ArrayList<String> am) {
+	public void setAm(ArrayList<Double> am) {
 		this.am = am;
 	}
-	public ArrayList<String> getFm() {
+	public ArrayList<Double> getFm() {
 		return fm;
 	}
-	public void setFm(ArrayList<String> fm) {
+	public void setFm(ArrayList<Double> fm) {
 		this.fm = fm;
 	}
-	public String getSavedStations() {
-		return SavedStations;
-	}
-	public void setSavedStations(String savedStations) {
-		SavedStations = savedStations;
-	}
+
 
 	
 //Interface two_options_operations
@@ -117,7 +119,7 @@ public class radio implements change_up_operations, two_options_operations, chan
 		// TODO Auto-generated method stub
 		if (on_off == true) {
 			if (am_fm==true && tuned_fm<=107.7) {
-				setTuned_fm(tuned_fm+0.2);
+				setTuned_fm(tuned_fm+0.20);
 			}
 			else if ((am_fm==true && tuned_fm>=107.9)) {
 				setTuned_fm(87.9);
@@ -138,7 +140,7 @@ public class radio implements change_up_operations, two_options_operations, chan
 		// TODO Auto-generated method stub
 		if (on_off==true) {
 			if (am_fm==true && tuned_fm>=88.1) {
-				setTuned_fm(tuned_fm-0.2);
+				setTuned_fm(tuned_fm-0.20);
 			}
 			else if ((am_fm==true && tuned_fm<=87.9)) {
 				setTuned_fm(107.9);
@@ -162,5 +164,25 @@ public class radio implements change_up_operations, two_options_operations, chan
 				
 			}
 		}
+	}
+
+	@Override
+	public void saveStation() {
+		// TODO Auto-generated method stub
+		if(isOn_off()==true && isAm_fm()==true) {
+			fm.add(getTuned_fm());
+		}
+		else if (isOn_off()==true && isAm_fm()==false) {
+			am.add(getTuned_am());
+		}
+	}
+
+	@Override
+	public void read_savedStation(int variable) {
+		// TODO Auto-generated method stub
+		if (on_off==true && am_fm==false) {
+			setTuned_am(getAm().get(variable));
+		}
+		
 	}
 }
