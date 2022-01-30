@@ -74,12 +74,16 @@ public class radio implements change_up_operations, two_options_operations, chan
 	@Override
 	public void onoff_() {
 		// TODO Auto-generated method stub
+
 		if (on_off == true) {
-			on_off=false;
+			setOn_off(false);
+
 		}
-		else {
-			on_off= true;
+		else if (on_off==false) {
+			setOn_off(true);
+
 		}
+
 	}
 
 	@Override
@@ -87,12 +91,13 @@ public class radio implements change_up_operations, two_options_operations, chan
 		// TODO Auto-generated method stub
 		if (on_off ==true) {
 			if (am_fm == true) {
-				am_fm=false;
+				setAm_fm(false);
 			}
 			else {
-				am_fm= true;
+				setAm_fm(true);
 			}	
 		}
+		
 	}
 	
 
@@ -102,10 +107,7 @@ public class radio implements change_up_operations, two_options_operations, chan
 		// TODO Auto-generated method stub
 		if (on_off==true) {
 			if (volume<=99) {
-				setVolume(volume+1);	
-			}
-			else {
-				
+				setVolume(volume+1);
 			}
 		}
 	}
@@ -114,16 +116,16 @@ public class radio implements change_up_operations, two_options_operations, chan
 	public void change_station_up() {
 		// TODO Auto-generated method stub
 		if (on_off == true) {
-			if (am_fm==true && tuned_fm<108.1) {
+			if (am_fm==true && tuned_fm<=107.7) {
 				setTuned_fm(tuned_fm+0.2);
 			}
-			else if ((am_fm==true && tuned_fm>=108.1)) {
+			else if ((am_fm==true && tuned_fm>=107.9)) {
 				setTuned_fm(87.9);
 			}
-			else if (am_fm==false && tuned_am<1620) {
+			else if (am_fm==false && tuned_am<=1600) {
 				setTuned_am(tuned_am+10);
 			}
-			else if ((am_fm==false && tuned_am>=1620)) {
+			else if ((am_fm==false && tuned_am>=1610)) {
 				setTuned_am(530);
 			}
 		}
@@ -135,13 +137,13 @@ public class radio implements change_up_operations, two_options_operations, chan
 	public void change_station_down() {
 		// TODO Auto-generated method stub
 		if (on_off==true) {
-			if (am_fm==true && tuned_fm<108.1) {
+			if (am_fm==true && tuned_fm>=88.1) {
 				setTuned_fm(tuned_fm-0.2);
 			}
-			else if ((am_fm==true && tuned_fm>=108.1)) {
+			else if ((am_fm==true && tuned_fm<=87.9)) {
 				setTuned_fm(107.9);
 			}
-			else if (am_fm==false && tuned_am>530) {
+			else if (am_fm==false && tuned_am>=540) {
 				setTuned_am(tuned_am-10);
 			}
 			else if ((am_fm==false && tuned_am<=530)) {
