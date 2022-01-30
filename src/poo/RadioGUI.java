@@ -1,5 +1,5 @@
 package poo;
-
+// Importación de swing para hacer la interfaz gráfica.
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,11 +10,12 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
+import javax.swing.JRadioButton;
+import javax.swing.JList;
+// Esta clase hereda de la super JFrame
 public class RadioGUI extends JFrame {
-	
+	//Definimos el objeto radio.
 	radio radio_operaciones = new radio();
-
 	private JPanel contentPane;
 
 
@@ -59,8 +60,9 @@ public class RadioGUI extends JFrame {
 		lblNewLabel_2.setBounds(83, 55, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		//Buttons
+//Buttons
 		
+		//Estos son los botones para guardar las estaciones de radio en AM.
 		JButton Button_savedStation_1_Am = new JButton("1");
 		Button_savedStation_1_Am.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,6 +138,7 @@ public class RadioGUI extends JFrame {
 		contentPane.add(Button_savedStation_6_Am);
 		Button_savedStation_6_Am.setEnabled(false);
 		
+		//Estos son los botones para guardar las estaciones de radio en FM.
 		JButton Button_savedStation_1_Fm = new JButton("1");
 		Button_savedStation_1_Fm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,6 +211,7 @@ public class RadioGUI extends JFrame {
 		contentPane.add(Button_savedStation_6_Fm);
 		Button_savedStation_6_Fm.setEnabled(false);
 		
+		//Botones para cambiar las emisoras (adelante y atrás).
 		JButton Button_NextTrack = new JButton("Next");
 		Button_NextTrack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -244,7 +248,7 @@ public class RadioGUI extends JFrame {
 		Button_pastTrack.setBounds(246, 78, 89, 23);
 		contentPane.add(Button_pastTrack);
 		Button_pastTrack.setEnabled(false);
-		
+		//Botón para cambiar el volumen (más o menos volumen).
 		JButton Button_moreVolume = new JButton("+");
 		Button_moreVolume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -270,6 +274,42 @@ public class RadioGUI extends JFrame {
 		Button_lessVolume.setEnabled(false);
 		
 		
+		
+//Saved Stations
+		
+		//Para elegir en donde se guardará la emisora tanto(FM como AM).
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(344, 179, 80, 22);
+		contentPane.add(comboBox);
+		comboBox.addItem(1);
+		comboBox.addItem(2);
+		comboBox.addItem(3);
+		comboBox.addItem(4);
+		comboBox.addItem(5);
+		comboBox.addItem(6);
+		comboBox.setEnabled(false);
+		
+		
+		JButton Button_Save_Station = new JButton("Save");
+		Button_Save_Station.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox.getSelectedItem();
+				if (radio_operaciones.isAm_fm()==false) {
+					radio_operaciones.saveStation((Integer)comboBox.getSelectedItem());
+				}
+				else if (radio_operaciones.isAm_fm()==true) {
+					radio_operaciones.saveStation((Integer)comboBox.getSelectedItem());
+				}
+				
+			}
+		});
+		Button_Save_Station.setBounds(345, 202, 80, 23);
+		contentPane.add(Button_Save_Station);
+		Button_Save_Station.setEnabled(false);
+        
+//Change frequency
+		
+		//Cambiar Am_Fm o On_Off
 		JButton Button_Am_Fm = new JButton("AM/FM");
 		Button_Am_Fm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -284,6 +324,9 @@ public class RadioGUI extends JFrame {
 					
 					Button_lessVolume.setEnabled(true);
 					Button_moreVolume.setEnabled(true);
+					
+					Button_Save_Station.setEnabled(true);
+					comboBox.setEnabled(true);
 					
 					Button_savedStation_1_Am.setEnabled(true);
 					Button_savedStation_2_Am.setEnabled(true);
@@ -309,6 +352,9 @@ public class RadioGUI extends JFrame {
 					
 					Button_lessVolume.setEnabled(true);
 					Button_moreVolume.setEnabled(true);
+					
+					Button_Save_Station.setEnabled(true);
+					comboBox.setEnabled(true);
 					
 					Button_savedStation_1_Am.setEnabled(false);
 					Button_savedStation_2_Am.setEnabled(false);
@@ -349,6 +395,8 @@ public class RadioGUI extends JFrame {
 					Button_NextTrack.setEnabled(false);
 					
 					Button_Am_Fm.setEnabled(false);
+					Button_Save_Station.setEnabled(false);
+					comboBox.setEnabled(false);
 					
 					Button_savedStation_1_Am.setEnabled(false);
 					Button_savedStation_2_Am.setEnabled(false);
@@ -368,27 +416,6 @@ public class RadioGUI extends JFrame {
 		});
 		Button_On_Off.setBounds(10, 11, 89, 23);
 		contentPane.add(Button_On_Off);
-		
-		//Saved Stations
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(344, 179, 80, 22);
-		contentPane.add(comboBox);
-		comboBox.addItem(1);
-		comboBox.addItem(2);
-		comboBox.addItem(3);
-		comboBox.addItem(4);
-		comboBox.addItem(5);
-		comboBox.addItem(6);
-		
-		JButton Button_Save_Station = new JButton("Save");
-		Button_Save_Station.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		Button_Save_Station.setBounds(345, 202, 80, 23);
-		contentPane.add(Button_Save_Station);
-        
 		
 		
 	}
