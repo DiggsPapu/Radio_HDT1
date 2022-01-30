@@ -27,19 +27,19 @@ public class radio implements change_up_operations, two_options_operations, chan
 
 	}	
 	
-	public boolean isOn_off() {
+	protected boolean isOn_off() {
 		return on_off;
 	}
-	public void setOn_off(boolean on_off) {
+	protected void setOn_off(boolean on_off) {
 		this.on_off = on_off;
 	}
-	public int getVolume() {
+	protected int getVolume() {
 		return volume;
 	}
-	public void setVolume(int volume) {
+	protected void setVolume(int volume) {
 		this.volume = volume;
 	}
-	public boolean isAm_fm() {
+	protected boolean isAm_fm() {
 		return am_fm;
 	}
 	public void setAm_fm(boolean am_fm) {
@@ -180,8 +180,11 @@ public class radio implements change_up_operations, two_options_operations, chan
 	@Override
 	public void read_savedStation(int variable) {
 		// TODO Auto-generated method stub
-		if (on_off==true && am_fm==false) {
+		if (isOn_off()==true && isAm_fm()==false) {
 			setTuned_am(getAm().get(variable));
+		}
+		else if (isOn_off()==true && isAm_fm()==true) {
+			setTuned_fm(getFm().get(variable));
 		}
 		
 	}
