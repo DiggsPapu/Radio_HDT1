@@ -250,6 +250,8 @@ public class RadioGUI extends JFrame {
 		Button_moreVolume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Radio.change_volume_up();
+				Radio.read_savedStation(3);
+				System.out.println(Radio.getActual_Station_Am());
 				String a=Integer.toString(Radio.getVolume());
 				lblNewLabel_2.setText(a);
 			}

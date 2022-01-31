@@ -22,14 +22,15 @@ public class radio implements change_up_operations, two_options_operations, chan
 		this.on_off = false;
 		this.volume = 0;
 		this.Am_SavedList_Stations_fm = false;
-		this.Actual_Station_Am = 530;
+		this.Actual_Station_Am = 530.0;
 		this.Actual_Station_Fm = 87.9;
 		this.Am_SavedList_Stations = new ArrayList<Double>();
-		for (int i=1;i<=7;i=i+1) {
+		for (int i=0;i<=6;i=i+1) {
 			Am_SavedList_Stations.add(530.0+10*i);
+			
 		}
 		this.Fm_SavedList_Stations = new ArrayList<Double>();
-		for (int i=1;i<=7;i=i+1) {
+		for (int i=0;i<=6;i=i+1) {
 			Fm_SavedList_Stations.add(87.9+0.2*i);
 		}
 
@@ -208,4 +209,5 @@ public class radio implements change_up_operations, two_options_operations, chan
 		}
 		
 	}
+	
 }
